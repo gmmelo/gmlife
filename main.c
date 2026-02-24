@@ -26,8 +26,9 @@ int main() {
 			int rand_idx = rand() % cell_total;
 			g.cells[rand_idx] = (Cell){ .state = ALIVE };
 
-			print_grid(g, step, &d);
-			printf("\nType q to quit. Type s to start simulation. Type anything else to continue random generation.\n");	
+			put_grid(g, step, &d);
+			put_string("\nType q to quit. Type s to start simulation. Type anything else to continue random generation.\n\n", 128, &d);	
+			draw(&d);
 
 			char c = get_one_char();	
 			if (c == 'q') quit(g, d);
@@ -39,8 +40,9 @@ int main() {
 			g = update_grid(g);		
 			step++;
 
-			print_grid(g, step, &d);
-			printf("\nType q to quit. Type r to restart. Type anything else to continue simulation.\n");
+			put_grid(g, step, &d);
+			put_string("\nType q to quit. Type r to restart. Type anything else to continue simulation.\n\n", 128, &d);
+			draw(&d);
 
 			char c = get_one_char();
 			if (c == 'q') quit(g, d);

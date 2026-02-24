@@ -114,7 +114,10 @@ Grid update_grid(Grid grid) {
 	for (int y = 0; y < grid.size.h; y++) {
 		for (int x = 0; x < grid.size.w; x++) {
 			int alive_neighbors = count_alive_neighbors(grid, x, y);
-			if (alive_neighbors == 2 || alive_neighbors == 3)
+			CellState cur_state = cat(grid, x, y);
+			char to_be_born = (cur_state == DEAD && alive_neighbors == 3);
+			char to_survive = (cur_state == ALIVE && (alive_neighbors == 2 || alive_neighbors == 3));
+			if (to_be_born || to_survive)
 				temp_set(grid, x, y, ALIVE); 
 			else temp_set(grid, x, y, DEAD);
 		}
