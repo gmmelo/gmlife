@@ -46,7 +46,9 @@ void put_string(char* s, int size, TermDisplay* d) {
 void draw(TermDisplay* d) {
 	if (d->cur_idx >= d->w * d->h) display_panic();
 	d->buf[d->cur_idx] = 0;
-	printf("\033[H\033[J%s", d->buf); 
+	fputs("\033[H\033[2J", stdout); 
+	fflush(stdout);
+	fputs(d->buf, stdout);
 	fflush(stdout);
 	d->cur_idx = 0;
 }
