@@ -39,8 +39,8 @@ Grid create_grid(Size size) {
 	int totalCells = size.w * size.h;
 	Grid grid = {
 		.size = size,
-		.cells = malloc(totalCells * sizeof(int)),
-		.temp_cells = malloc(totalCells * sizeof(int))
+		.cells = (Cell*)malloc(totalCells * sizeof(int)),
+		.temp_cells = (Cell*)malloc(totalCells * sizeof(int))
 	};
 
 	for (int i = 0; i < totalCells; i++) {

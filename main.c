@@ -11,6 +11,13 @@
 #define SIMULATION_FRAME_TIME 33000
 #define SIMULATION_MAX_STEPS 350
 
+#define GOTO_ALTERNATE_BUFFER "\033[?1049h"
+#define EXIT_ALTERNATE_BUFFER "\033[?1049l"
+#define SHOW_CURSOR "\033[?25h"
+#define HIDE_CURSOR "\033[?25l"
+#define CLEAR_SCREEN "\033[2J"
+#define GOTO_TOP_LEFT "\033[;H"
+
 Size size = { .w = 48, .h = 48 };
 TermDisplay d;
 Grid g;
@@ -24,6 +31,11 @@ int main() {
 	srand(time(NULL));
 	d = init_display(128, 128);
 	signal(SIGINT, stop);	
+
+	printf(GOTO_ALTERNATE_BUFFER);
+	printf(CLEAR_SCREEN);
+	printf(GOTO_TOP_LEFT);
+	printf(HIDE_CURSOR);
 
 	while (keep_running) {
 		g = create_grid(size);
@@ -60,5 +72,9 @@ int main() {
 		destroy_grid(g);
 	}
 
+	printf(EXIT_ALTERNATE_BUFFER);
+	printf(SHOW_CURSOR);
+	printf(GOTO_TOP_LEFT);
+	printf(CLEAR_SCREEN);
 	destroy_display(d);
 }
